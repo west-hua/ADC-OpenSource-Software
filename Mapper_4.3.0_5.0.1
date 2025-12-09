@@ -1,0 +1,12 @@
+5.0.0 发布
+基于 jdk17 和 spring boot 3.3 开发
+JPA 依赖改为 jakarta.persistence-api
+mybatis-spring 重新适配，兼容原有配置
+mybatis-spring-boot-starter 重新适配，兼容原有配置和逻辑
+特别说明
+mybatis.basePackages 是 tk.mapper 中特有的配置（4.x就有的），当通过这个配置指定 Mapper 所在包后，不会再指定扫描 @Mapper 注解的接口。会扫描指定包下面所有的接口（会排除 @RegisterMapper 注解标记的通用接口）。
+
+5.0.1 Latest
+增加参数enableBaseResultMapFlag 是否自动处理 Mapper 接口中其他手写指定 resultType 的返回结果类型为 resultMap。，默认 false 不启用。
+此版本和 5.0.0 会因为上述参数不兼容，上面 自动处理 Mapper 接口中其他手写指定 resultType 的返回结果类型为 resultMap 是 5.0 版本增加的一个功能，由于对低版本4.x存在兼容性问题，因此在5.0.1改正了这个问题。
+和 5.0.0 相比，5.0.1启用后也只会修改通过 resultType 设置返回值的情况，如果本身指定了 resultMap，就不会再覆盖手工设置的值。
