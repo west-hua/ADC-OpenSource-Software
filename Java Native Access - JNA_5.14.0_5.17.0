@@ -1,0 +1,25 @@
+Release 5.15.0
+Features
+#1578: Add support for FreeBSD aarch64 - @alexdupre.
+#1593: Add support for DragonFly BSD x86-64 - @liweitianux.
+#1595: Add IsProcessorFeaturePresent to c.s.j.p.win32.Kernel32 - @dbwiddis.
+#1602: Add XMoveWindow, XResizeWindow, XMoveResizeWindow, XRaiseWindow, XLowerWindow X11 calls to c.s.j.p.unix.X11 - @vinceh121.
+#1613: Added static helper method `Native#getNativeLibrary' for getting the underlying NativeLibrary instance from a Library interface instance or from a "registered" class - @matthiasblaesing.
+#1624: Enable linker build-id for android builds - @mstyura.
+Bug Fixes
+#1579: Fix analysis of ELF binary on arm systems running with a java ELF binary without section table headers (java8 on armv7 NAS) - @matthiasblaesing.
+#1586: Fix free_callback JNI weak reference leak - @xiezhaokun.
+6486c90d913a413f247eef84742ce3c474738933: Check CallbackReference#cbstruct for null when checking existing Reference - @matthiasblaesing.
+#1622: Add "linux-riscv64" entry to OSGI Bundle-NativeCode header in MANIFEST.MF - @matthiasblaesing.
+
+Release 5.16.0
+Features
+#1626: Add caching of field list and field validation in Structure along with more efficient reentrant read-write locking instead of synchronized() blocks - @BrettWooldridge
+Bug Fixes
+#1618: Fix calls to jnidispatch on Android with 16KB page size - @Thomyrock
+
+Release (5.17.0)
+Features
+#1658: Add win32 power event constants, types, and functions - @eranl.
+Bug Fixes
+#1647: Fix calls to jnidispatch on Android with 16KB page size (part 2) - @BugsBeGone.
