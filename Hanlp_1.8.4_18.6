@@ -1,0 +1,24 @@
+v1.8.5 常规维护
+What's Changed
+修复mini二元文法在JRE初始化后第一次分词可能出现的不一致 fix: #1851 (comment)
+修复ViterbiSegment分词器中加载自定义词典时未替换DoubleArrayTrie导致分词不符合预期的问题 by @wxy929629 in #1835
+fix:修复CWSEvaluator比较切分语句时的计算错误 by @webSue in #1853
+数据包兼容data-for-1.7.5.zip md5=1d9e1be4378b2dbc635858d9c3517aaa
+Portable版同步升级到v1.8.5
+        <dependency>
+            <groupId>com.hankcs</groupId>
+            <artifactId>hanlp</artifactId>
+            <version>portable-1.8.5</version>
+        </dependency>
+
+v1.8.6 常规维护
+What's Changed
+更新Portable版中的自定义词典 fix: #1936
+清理 Predefine
+数据包兼容data-for-1.7.5.zip md5=1d9e1be4378b2dbc635858d9c3517aaa
+Portable版同步升级到v1.8.6
+        <dependency>
+            <groupId>com.hankcs</groupId>
+            <artifactId>hanlp</artifactId>
+            <version>portable-1.8.6</version>
+        </dependency>
