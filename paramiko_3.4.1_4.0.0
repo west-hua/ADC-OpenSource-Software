@@ -1,0 +1,26 @@
+Paramiko's Changelog: https://www.paramiko.org/changelog.html
+
+3.4.1 2024-08-11
+[Bug] #2353: Fix a 64-bit-ism in the test suite so the tests don’t encounter a false negative on 32-bit systems. Reported by Stanislav Levin.
+[Bug] #2420: Modify a test-harness skiptest check to work with newer versions of Cryptography. Props to Paul Howarth for the patch.
+[Bug] #2419: (fixed in #2421) Massage our import of the TripleDES cipher to support Cryptography >=43; this should prevent CryptographyDeprecationWarning from appearing upon import. Thanks to Erick Alejo for the report and Bryan Banda for the patch.
+
+3.5.0 2024-09-15
+[Feature] #982: (via #2444, which was a rebase of #2157) Add support for AES-GCM encryption ciphers (128 and 256 bit variants). Thanks to Alex Gaynor for the report (& for cryptography review), Shen Cheng for the original PR, and Chris Mason for the updated PR; plus as usual to everyone who tested the patches and reported their results!
+This functionality has been tested in client mode against OpenSSH 9.0, 9.2, and 9.6, as well as against a number of proprietary appliance SSH servers.
+
+3.5.1 2025-02-03
+[Bug] #2490: Private key material is now explicitly ‘unpadded’ during decryption, removing a reliance on some lax OpenSSL behavior & making us compatible with future Cryptography releases. Patch courtesy of Alex Gaynor.
+
+4.0.0 2025-08-03
+[Support] #973: Removed support for the DSA (aka DSS) key algorithm, as it has been badly outdated and insecure for a decade or more at this point, and was recently completely removed from OpenSSH as well.
+If you were still using DSA out of sheer inertia: we strongly recommend upgrading to Ed25519 (or maybe ECDSA).
+If you were still using DSA because of target hosts you do not control: please continue using Paramiko 3.x.
+[Support]: Administrivia update:
+dropped support for Python <3.9
+migrated packaging metadata and practices to use pyproject.toml
+removed the now-vestigial ed25519 packaging ‘extra’ (support for this hasn’t required additional dependencies in a number of releases now, just the core ones)
+moved Invoke requirement to core dependencies, and removed paramiko[invoke] from extras
+with those two changes, paramiko[all] becomes much less useful, and has itself been axed
+removed the very old and wizened setup_helper.py which was only needed on ancient (for this century) versions of macOS.
+removed paramiko.__all__, as it was redundant (guessing it dated back to some very old Python versions; anyone using import * these days - shame! - should still be fine as we never had any ‘private’ members in __all__ and AFAICT that was the only reason ever to use it in the first place (as import * skips names like _private).
