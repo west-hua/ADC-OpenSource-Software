@@ -1,0 +1,55 @@
+PyMongo 4.8.0
+Changes in Version 4.8.0
+PyMongo 4.8 brings a number of improvements including:
+
+The handshake metadata for "os.name" on Windows has been simplified to "Windows" to improve import time.
+The repr of bson.binary.Binary is now redacted when the subtype is SENSITIVE_SUBTYPE(8).
+Secure Software Development Life Cycle automation for release process.
+GitHub Releases now include a Software Bill of Materials, and signature
+files corresponding to the distribution files released on PyPI.
+Fixed a bug in change streams where both startAtOperationTime and resumeToken
+could be added to a retry attempt, which caused the retry to fail.
+Fallback to stdlib ssl module when pyopenssl import fails with AttributeError.
+Improved performance of MongoClient operations, especially when many operations are being run concurrently.
+Unavoidable breaking changes
+Since we are now using hatch as our build backend, we no longer have a usable setup.py file
+and require installation using pip. Attempts to invoke the setup.py file will raise an exception.
+Additionally, pip >= 21.3 is now required for editable installs.
+Issues Resolved
+See the PyMongo 4.8 release notes in JIRA for the list of resolved issues in this release.
+
+PyMongo 4.9.2
+Fixed a bug where pymongo.asynchronous.mongo_client.AsyncMongoClient could deadlock.
+Fixed a bug where PyMongo could fail to import on Windows if asyncio is misconfigured.
+Fixed a bug where pymongo.results.UpdateResult.did_upsert would raise a TypeError.
+
+PyMongo 4.11.2
+Community notes:
+
+What's Changed
+PYTHON-5166 Allow Database.command to run bulkWrite commands (#2164) [v4.11] by @ShaneHarvey in #2172
+PYTHON-5155 Use dochub link for fork warning (#2173) [v4.11] by @ShaneHarvey in #2174
+
+PyMongo 4.11.3
+What's Changed
+PYTHON-5202 WaitQueueTimeoutError should not clear the pool (#2192) [v4.11] by @mongodb-drivers-pr-bot in #2196
+PYTHON-5131 [v4.11] Migrate off of Ubuntu 20.04 GitHub Actions Runners by @blink1073 in #2182
+PYTHON-5198 Fix test_03_invalid_keyid (#2195) [v4.11] by @mongodb-drivers-pr-bot in #2198
+Prepare for 4.11.3 release by @blink1073 in #2208
+
+PyMongo 4.12.1
+Community notes: https://www.mongodb.com/community/forums/t/pymongo-4-12-1-released/320326
+
+What's Changed
+PYTHON-5288: [v4.12] SRV hostname validation fails when resolver and resolved hostnames are identical with three domain levels by @blink1073 in #2276
+PYTHON-5297 [v4.12] AsyncMongoClient connection error causes UnboundLocalError by @blink1073 in #2277
+PYTHON-5295 [v4.12] Update lockfile for compat with older versions of uv by @blink1073 in #2278
+PYTHON-5310 [v4.12] Fix uri_parser AttributeError when used directly (#2283) by @ShaneHarvey in #2302
+PYTHON-5314 [v4.12] Fix default imports for modules that worked in v4.8 (#2300) by @ShaneHarvey in #2303
+PYTHON-5348 Fix CodeQL Scanning for GitHub Actions (#2308) [v4.12] by @mongodb-drivers-pr-bot in #2310
+PYTHON-5212 [v4.12] Do not hold Topology lock while resetting pool by @blink1073 in #2307
+PYTHON-5346: [v4.12] test_init_disconnected_with_srv cannot run against sharded Topologies (#2304) by @NoahStapp in #2309
+PYTHON-5306: [v4.12] - Fix use of public MongoClient attributes before connection (#2285) by @NoahStapp in #2311
+PYTHON-5336 Added VECTOR_SUBTYPE line to API docs (#2313) [v4.12] by @mongodb-drivers-pr-bot in #2314
+PYTHON-5309: [v4.12] AsyncMongoClient doesn't use PyOpenSSL (#2286) by @NoahStapp in #2319
+PYTHON-5357 Update changelog for 4.12.1 release (#2321) by @aclark4life in #2323
