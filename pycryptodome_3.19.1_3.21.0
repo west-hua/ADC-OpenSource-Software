@@ -1,0 +1,34 @@
+v3.20.0 - Amiens
+New features
+Added support for TurboSHAKE128 and TurboSHAKE256.
+Added method Crypto.Hash.new() to generate a hash
+object given a hash name.
+Added support for AES-GCM encryption of PBES2 and PKCS#8
+containers.
+Added support for SHA-2 and SHA-3 algorithms in PBKDF2
+when creating PBES2 and PKCS#8 containers.
+Export of RSA keys accepts the prot_params dictionary
+as parameter to control the number of iterations for PBKDF2
+and scrypt.
+C unit tests also run on non-x86 architectures.
+Resolved issues
+GH#787: Fixed autodetect logic for GCC 14 in combination with LTO.
+
+v3.21.0 - Bourdeaux
+New features
+By setting the PYCRYPTODOME_DISABLE_GMP environment variable,
+the GMP library will not be used even if detected.
+Add support for Curve25519 / X25519.
+Add support for Curve448 / X448.
+Add attribute curve to EccPoint and EccXPoint classes,
+with the canonical name of the curve.
+GH#781: the label for the SP800_108_Counter KDF may now
+contain zero bytes. Thanks to Julien Rische.
+GH#814: RSA keys for PSS can be imported.
+Resolved issues
+GH#810: fixed negation of Ed25519 points.
+GH#819: accept an RFC5916 ECPrivateKey even if it doesn't
+contain any of the optional elements
+(parameters [0] and publicKey[1]).
+Other changes
+Remove support for Python 3.5.
