@@ -43,151 +43,83 @@ Improved test suite and documentation.
 
 3.0.0
 Added new methods Connection.fetch_df_all(), Connection.fetch_df_batches(), AsyncConnection.fetch_df_all(), and AsyncConnection.fetch_df_batches() to fetch data as OracleDataFrame objects that expose an Apache Arrow PyCapsule interface for efficient data exchange with external libraries. See Working with Data Frames.
-
 Added support for Oracle Database 23.7 SPARSE vectors.
-
 Added support for naming and caching connection pools during creation, and retrieving them later from the python-oracledb pool cache with oracledb.get_pool().
-
 Added Centralized Configuration Provider support for Oracle Cloud Infrastructure Object Storage, Microsoft Azure App Configuration, and file-based configurations.
-
 Added oracledb.register_password_type() to allow users to register a function that will be called when a password is supplied as a dictionary containing the key “type”.
-
 Added cloud native authentication support through the integration of Oracle Cloud Infrastructure (OCI) SDK and Azure SDK.
-
 Added parameter extra_auth_params to oracledb.connect(), oracledb.connect_async(), oracledb.create_pool(), and oracledb.create_pool_async() which is used to specify the configuration parameters required for cloud native authentication.
-
 Added oracledb.register_params_hook() and oracledb.unregister_params_hook() which allow users to register or unregister a function that manipulates the parameters used for creating pools or standalone connections. See oci_tokens and azure_tokens plugins which make use of this functionality.
-
 Added attributes DbObjectAttribute.precision, DbObjectAttribute.scale, and DbObjectAttribute.max_size that provide additional metadata about database object attributes.
-
 The attribute oracledb.defaults.config_dir is now set to $ORACLE_HOME/network/admin if the environment variable ORACLE_HOME is set and TNS_ADMIN is not set.
-
 All connect strings are parsed by the driver if the new parameter thick_mode_dsn_passthrough is set to True. Previously, only Thin mode parsed all connect strings and Thick mode passed the connect string unchanged to the Oracle Client library to parse. Parameters unrecognized by the driver in Easy Connect strings are now ignored. Parameters unrecognized by the driver in the DESCRIPTION, CONNECT_DATA and SECURITY sections of a full connect descriptor are passed through unchanged. All other parameters in other sections of a full connect descriptor that are unrecognized by the driver are ignored.
-
 Fixed bug where some DbObject attributes for database objects defined using ANSI names (including FLOAT and REAL) may have shown as integers.
-
 All Oracle errors that result in the connection no longer being usable will be raised as DPY-4011: the database or network closed the connection with the underlying reason being included in the error message.
-
 Fix typing issue with oracledb.connect(), oracledb.connect_async(), oracledb.create_pool() and oracledb.create_pool_async() (issue 438).
-
 Fix typing issues with setters for oracledb.defaults.fetch_lobs and oracledb.defaults.fetch_decimals (issue 458).
-
 Error DPY-2053: python-oracledb thin mode cannot be used because thick mode has already been enabled is now raised when attempting to use asyncio in Thick mode (issue 448).
-
 Error DPY-2056: registered handler for protocol "{protocol}" failed for arg "{arg}" is now raised when an exception occurs when calling the registered handler for a protocol.
-
 Added a sample Dockerfile that can be used to create a container for developing and deploying python-oracledb applications.
-
 Internal change: improve handling of metadata.
-
 Internal build tool change: bumped minimum Cython version to 3.0.10 to avoid bug in earlier versions.
-
 Improved test suite and documentation.
 
 3.1.0
 Dropped support for Python 3.8.
-
 Improvements to data frame fetching with Connection.fetch_df_all() and Connection.fetch_df_batches():
-
 Added support for CLOB, BLOB, and RAW data types
-
 Fixed support for BOOLEAN data type
-
 Fixed bug when NUMBER data is fetched that does not have a precision or scale specified and oracledb.defaults.fetch_decimals is set to True.
-
 More efficient processing when a significant amount of data is duplicated from one row to the next
-
 Avoid memory allocation/free cycles for decimal data
-
 Eliminated memory leak if OracleDataFrame is not converted to an external data frame
-
 Eliminated small memory leak with production of each data frame
-
 Made the Azure App Centralized Configuration Provider connection string suffix “.azconfig.io” optional.
-
 Fixed bug when binding a variable that was previously bound as an output variable in a DML RETURNING statement.
-
 Fixed bug when multiple rows containing LOBs and DbObjects are returned in a DML RETURNING statement.
-
 An error message that links to documentation on setting up a protocol hook function is now returned by default for LDAP and LDAPS URL connection strings in python-oracledb Thin mode, or when oracledb.defaults.thick_mode_dsn_passthrough is False.
-
 Error DPY-2062: payload cannot be enqueued since it does not match the payload type supported by the queue is now raised when the payload of a message being enqueued is not supported by the queue. Previously, python-oracledb Thick mode raised the error DPI-1071: payload type in message properties must match the payload type of the queue and Thin mode raised an internal error.
-
 Improved the test suite and documentation.
 
 3.1.1
 Added support for using the Cython 3.1 release (issue 493).
-
 Improvements to data frame fetching with Connection.fetch_df_all() and Connection.fetch_df_batches():
-
 Added support for converting an OracleDataFrame object to a foreign data frame object more than once (issue 470).
-
 Fixed a bug resulting in a segfault when attempting to use an output type handler while fetching data frames (issue 486).
-
 Fixed memory corruption in data frame queries (issue 489).
-
 Fixed parsing of the connection string in the Azure App Centralized Configuration Provider.
-
 Miscellaneous grammar and spelling fixes by John Bampton (PR 479).
 
 3.2.0
 Added Instance Principal authentication support when using OCI Cloud Native Authentication.
-
 Improvements to data frame support:
-
 Added support for VECTOR columns when fetching data frames.
-
 Fixed date handling to match PyArrow’s and avoid localization issues (issue 499).
-
 Fixed bug on Windows when fetching dates prior to 1970 and after 2038 (issue 483).
-
 Added support for the NCHAR, NVARCHAR and NCLOB data types (issue 505).
-
 Added parameter pool_name to connection and pool creation methods to support Oracle Database 23.4 multi-pool Database Resident Connection Pooling (DRCP).
-
 GitHub Action workflow updates:
-
 Use GitHub Arm Linux runner for builds. Supplied by wojiushixiaobai (PR 496).
-
 Allow the GitHub build action to build a user-chosen subset of packages.
-
 Fix bug with GitHub build action merge artifacts step (issue 495).
-
 Error DPY-2064: parameter 'max' should be greater than or equal to parameter 'min' is now raised when a call to oracledb.create_pool(), oracledb.create_pool_async() or oracledb.PoolParams() is made with parameter max less than the parameter min. Previously python-oracledb Thin mode did not raise an error and python-oracledb Thick mode raised the exception ORA-24413: Invalid number of sessions specified.
-
 Improved the test suite and documentation.
 
 3.3.0
 Pre-built binaries are now being created for Python 3.14. Note this Python version is currently in release candidate phase.
-
 Added support for Oracle Database 23.6 Sessionless Transactions.
-
 Changes to data frame support:
-
 Added support for binding data frames to Cursor.executemany() and AsyncCursor.executemany() for fast data ingestion. See Inserting Data Frames.
-
 Added internal support for the ArrowArrayStream PyCapsule interface to simplify DataFrame use.
-
 Removed use of the DataFrame Interchange Protocol in python-oracledb DataFrame objects.
-
 Removed the prefix “Oracle” from the data frame object names. They are now called DataFrame and ArrowArray.
-
 Documentation on methods and attributes of the DataFrame and ArrowArray objects is now available when using IDE introspection.
-
 Upgraded Arrow C Data (nanoarrow) API version to 0.7.0.
-
 Ensured that the Python GIL is held when releasing references to ArrowArray objects when exported Arrow buffers are released by the consumer. This avoids a segfault seen in some circumstances.
-
 Fixed bug when deciding Arrow datatype for numeric expressions. (issue 510)
-
 Fixed bug when fetching numeric data that has no decimal point but the Arrow array has scale > 0.
-
 Fixed bug when fetching dates that are in the year 2038 or later.
-
 Fixed bug when fetching numeric data with precision that exceeds 38 as decimal data.
-
 Fixed bug when fetching large amounts of data in one round-trip when using asyncio with Oracle Database 21c and earlier.
-
 Note the data frame support in python-oracledb 3.3 is a pre-release, and may change in a future version.
-
 Internal change: migrated build configuration completely to pyproject.toml, which allows for optional dependencies for the test suite on the numpy, pandas and pyarrow modules
