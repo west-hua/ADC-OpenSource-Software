@@ -1,0 +1,95 @@
+Release 6.4.12
+Bug fixes / Improvements
+#2278: Use lscpu Model Name as backup for cpuName - @13276965576.
+
+Release 6.4.13
+Bug fixes / Improvements
+#2588: Fix parsing of strings to long arrays - @cl728.
+
+Release 6.5.0
+New Features
+#2592: Add getFeatureFlags method to CentralProcessor API - @dbwiddis.
+
+Release 6.6.0
+New Features
+#2603, #2625: Add part number to Physical Memory - @BartekDziurowicz, @dbwiddis.
+Bug fixes / Improvements
+#2605: Reduce CpuStat.getSystemCpuLoadticks memory allocation pressure - @chrisribble.
+#2612: Use 1k buffer in FileUtils.readLines to reduce heap allocation pressure - @chrisribble.
+#2621: Cache thread counters when updating OS Process with suspended state - @dbwiddis.
+#2626: Make sys and dev paths on Linux configurable - @dbwiddis.
+#2627: Add more SMBIOSMemoryType values - @dbwiddis.
+
+Release 6.6.1
+New Features
+#2644: Add serial number to Physical Memory - @Tegrason.
+Bug fixes / Improvements
+#2645: fix getOwningProcessId sometimes return -1 on 64x linux - @yourancc.
+
+Release 6.6.2
+Bug fixes / Improvements
+#2660: Add macOS 15 (Sequoia) to version properties - @dbwiddis.
+#2662: Only warn on duplicate properties files if they differ - @dbwiddis.
+#2692: Do not log errors for reading process arguments on Linux - @wolfs.
+
+Release 6.6.3
+Bug fixes / Improvements\
+#2704: Properly parse CPU vendor when lscpu not available - @dbwiddis.
+#2705: Restore optional legacy method of calculating Windows System CPU - @dbwiddis.
+
+Release 6.6.4
+Bug fixes / Improvements
+#2711: Do not log error on macOS for hw.nperflevels - @Puppy4C.
+#2722: Fix speed value for LinuxNetworkIF - @Puppy4C.
+#2724: Clarify IO bytes documentation on OSProcess - @dbwiddis.
+#2725: Reduce redundant logging on perf counter failures - @dbwiddis.
+#2726: JNA 5.15.0 - @dbwiddis.
+
+Release 6.6.5
+Bug fixes / Improvements
+#2740: Fix Linux CPU thermal zone path string - @1056227556.
+
+Release 6.6.6
+Bug fixes / Improvements
+#2793: Enable configurable prioritization of thermal zones - @joerg1985.
+#2796: Support memory speed units of MT/s - @dbwiddis.
+
+Release 6.7.0
+New Features
+#2814: Fetch Windows sensor information via jLibreHardwareMonitor - @pandalxb.
+Bug fixes / Improvements
+#2805: Fix EdidUtil.getManufacturerID() not reading all bits of id - @JonathanTheDev.
+#2815: Trim the trailing NUL of /proc/device-tree/model - @Glavo.
+
+Release 6.7.1
+Bug fixes / Improvements
+#2835: Configure bnd-maven-plugin to make librehardwaremonitor optional - @merks.
+#2838: Improve Windows baseboard model identification - @dbwiddis.
+#2841: Resolve Windows Server 2025 on older JDKs - @dbwiddis.
+#2843: Allow System Properties to override oshi.properties values - @dbwiddis.
+#2846: Optimize netstat calls using /proc files - @rohan-coder02.
+
+Release 6.8.0
+New Features
+#2851: Report installed apps stats on mac, windows, and linux - @rohan-coder02.
+#2854: Add raw access to map structures in proc filesystem - @jdeppe-pivotal.
+Bug fixes / Improvements
+#2849: Include 3D controller ([0302]) in Linux GPU detection - @lesley29.
+
+Release 6.8.1
+Bug fixes / Improvements
+#2868: Fix windows thread details collection - @dbwiddis.
+
+Release 6.8.2
+Bug fixes / Improvements
+#2889: Handle system date format on macOS getInstalledApps output parsing - @dyorgio.
+
+Release 6.8.3
+Bug fixes / Improvements
+#2902: Deduplicate installed applications using Set across Windows, Linux, MacOS and Read both 32-bit, 64-bit Windows registry keys when fetching installed apps - @rohan-coder02.
+#2908: Fix Windows cache size - @lesley29.
+#2912: Installed apps feature for AIX - @rohan-coder02.
+#2926: Exclude CD-ROM from Windows FileSystem localOnly query - @cesnekmichal.
+#2929: Improve Linux temperature sensor selection - @dbwiddis.
+#2939: Add get preferred resolution to the EdidUtil Class - @ayonization.
+#2941: Add get monitor model to the EdidUtil Class - @ayonization.
