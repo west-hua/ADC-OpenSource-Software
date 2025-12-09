@@ -1,1 +1,65 @@
+v0.11.0
+Summary: More control over the {left-to-right, right-to-left, top-to-bottom, bottom-to-top} direction that pdfplumber reads/writes text (many thanks to @afriedman412 for the idea and prototype in #1040), plus upgrading to pdfminer.six's latest release (which provides more detailed paths for curves), and some fixes.
 
+Added
+Add {line,char}_dir{,rotated,render} params, to provide better support for non–top-to-bottom, left-to-right text (h/t @afriedman412). (850fd45)
+Add curve["path"] and curve["dash"], thanks to pdfminer.six upgrade (see below). (1820247)
+Changed
+Upgrade pdfminer.six from 20221105 to 20231228. (cd2f768)
+Change value of in word["direction"] from {1,-1} to {"ltr","rtl","ttb","btt"}. (850fd45)
+Deprecate vertical_ttb, horizontal_ltr in favor of char_dir and char_dir_rotated.(850fd45)
+Fixed
+Fix layout-caching issue caused by 0bfffc2. (#1097 + efca277)
+Fix missing ParentTree edge-case. (#1094))
+
+v0.11.1
+Fixed
+Fix .open(..., repair=True) subprocess args (to avoid stderr being captured) (70534a7)
+Fix coordinates of annots on rotated pages (aaa35c9)
+Fix handling of PDFDocEncoding failures in decode_text(...)(#1147 + 4daf0aa)
+Add .get_textmap.cache_clear() to page.close() (0a26f05)
+
+v0.11.2
+Added
+Add extra_attrs parameter to .dedupe_chars(...) to adjust the properties used when deduplicating (h/t @QuentinAndre11). (#1114)
+Development Changes
+Remove testing for Python 3.8, add testing for Python 3.12. (944eaed)
+Upgrade flake8, pytest, and pytest-cov — and add setuptools and py as explicit dev requirements (for Python 3.12).
+
+v0.11.3
+Added
+Add Table.columns, analogous to Table.rows (h/t @Pk13055). (#1050 + d39302f)
+Add Page.extract_words(return_chars=True), mirroring Page.search(..., return_chars=True); if this argument is passed, each word dictionary will include an additional key-value pair: "chars": [char_object, ...] (h/t @cmdlineluser). (#1173 + 1496cbd)
+Add pdfplumber.open(unicode_norm="NFC"/"NFD"/"NFKC"/NFKD"), where the values are the four options for Unicode normalization (h/t @petermr + @agusluques). (#905 + 03a477f)
+Changed
+Change default setting pdfplumber.repair(...) passes to Ghostscript's -dPDFSETTINGS parameter, from prepress to default, and make that setting modifiable via .repair(setting=...), where the value is one of "default", "prepress", "printer", or "ebook" (h/t @Laubeee). (#874 + 48cab3f)
+Fixed
+Fix handling of object coordinates when mediabox does not begin at (0,0) (h/t @wodny). (#1181 + 9025c3f + 046bd87)
+Fix error on getting .annots/.hyperlinks from CroppedPage (due to missing .rotation and .initial_doctop attributes) (h/t @Safrone). (#1171 + e5737d2)
+Fix problem where Page.crop(...) was not cropping .annots/.hyperlinks (h/t @Safrone). (#1171 + 22494e8)
+Fix calculation of coordinates for .annots on CroppedPages. (0bbb340 + b16acc3)
+Dereference structure element attributes (h/t @dhdaines). (#1169 + 3f16180)
+Fix Page.get_attr(...) so that it fully resolves references before determining whether the attribute's value is None (h/t @zzhangyun + @mkl-public). (#1176 + c20cd3b)
+
+v0.11.4
+Fixed
+Fix one type hint so that it doesn't throw error on Python 3.8 (h/t @andrekeller). (#1184)
+
+v0.11.5
+Added
+Add --format text options to CLI (in addition to previously-available csv and json) (h/t @brandonrobertz). (#1235)
+Add raise_unicode_errors: bool parameter to pdfplumber.open() to allow bypassing UnicodeDecodeErrors in annotation-parsing and generate warnings instead (h/t @stolarczyk). (#1195)
+Add name property to image objects (h/t @djr2015). (#1201)
+Fixed
+Fix PageImage.debug_tablefinder(...) so that its main keyword argument is named the same (table_settings=) as other related Page methods (h/t @stolarczyk). (#1237)
+
+v0.11.6
+Changed
+Upgrade pdfminer.six from 20231228 to 20250327 (3fcb493 + 12a73a2)
+Use csv.QUOTE_MINIMAL for .to_csv(...) (980494a)
+Fixed
+Fix bug with use_text_flow=True text extraction (h/t @samuelbradshaw) (#1279 + e15ed98)
+Catch exceptions from pdfminer and malformed PDFs (43ccc5b)
+More broadly handle RecursionError (748ff31)
+Removed
+Remove test_issue_1089 (#1263 + 7e28e76)
